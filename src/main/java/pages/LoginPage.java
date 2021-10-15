@@ -3,6 +3,7 @@ package pages;
 import BaseElements.BaseAbstractPage;
 import Core.TAEDriver;
 import Entities.User;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -22,6 +23,8 @@ public class LoginPage extends BaseAbstractPage {
     public WebElement passwordInput;
     @FindBy(how = How.XPATH, xpath = "//input[@value='LOGIN']")
     public WebElement loginButton;
+    @FindBy(xpath = "//*[@class=' alert alert-danger']")
+    public WebElement alertMessage;
 
     public LoginPage(TAEDriver driver) {
         super(driver, TITLE);
@@ -53,5 +56,9 @@ public class LoginPage extends BaseAbstractPage {
     public void tryLogin(User user) {
         fillLoginForm(user);
         submit();
+    }
+
+    public boolean alertMessageVisible(){
+        return alertMessage.isDisplayed();
     }
 }

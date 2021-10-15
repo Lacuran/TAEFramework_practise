@@ -20,7 +20,7 @@ public class HotelsTests extends BaseAbstractTest {
         getDriver().navigateTo("https://www.phptravels.net/");
 
         String city = "Krakow";
-        Travellers travellers = new Travellers();
+//        Travellers travellers = new Travellers();
         HotelsSearch hotelsSearch = new HotelsSearch();
 
         new HomePage(getDriver()).switchToHotelsPage().fillPageAndSearch(hotelsSearch);
