@@ -13,7 +13,7 @@ import uicontrols.TravellersControl;
 
 
 public class HotelsPage extends BaseAbstractPage {
-    public static String TITLE = "PHPTRAVELS - PHPTRAVELS";
+    public static String TITLE = "Search Hotels - PHPTRAVELS";
     CustomSelect cityDropdown;
 
     @FindBy(xpath = "//*[@id='rooms']")

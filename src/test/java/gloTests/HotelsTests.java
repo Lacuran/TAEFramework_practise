@@ -6,6 +6,7 @@ import TAExceptions.TAUnknownBrowserException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.HomePage;
 import pages.HotelsPage;
 import uicontrols.CustomSelect;
 
@@ -18,9 +19,12 @@ public class HotelsTests extends BaseAbstractTest {
     @BeforeTest
     public void setUp(){
         getDriver().navigateTo("https://www.phptravels.net/");
+        HomePage homePage = new HomePage(getDriver());
+        homePage.switchToHotelsPage();
         String city = "Krakow";
         CustomSelect customSelect = new CustomSelect("HotelCity", getDriver(), "(//*[@role='combobox'])[1]");
         customSelect.selectItem(city);
+
     }
 
     @Test
