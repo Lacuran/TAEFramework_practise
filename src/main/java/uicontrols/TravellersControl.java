@@ -3,6 +3,8 @@ package uicontrols;
 import BaseControlls.BaseControl;
 import Core.TAEDriver;
 import Entities.Travellers;
+import forms.HotelForm;
+import forms.HotelForm.*;
 import org.openqa.selenium.By;
 
 public class TravellersControl extends BaseControl {
@@ -14,8 +16,26 @@ public class TravellersControl extends BaseControl {
         super(name, driver, xpath);
     }
 
+
     public void setTravellers(Travellers travellers){
-        //this method should set travellers controls
-        //to the state of passed travellers object
+        HotelForm hotelForm = new HotelForm(driver);
+
+        hotelForm.clearForm();
+
+        hotelForm.rooms.sendKeys(String.valueOf(travellers.getRooms()));
+        hotelForm.adults.sendKeys(String.valueOf(travellers.getAdults()));
+        hotelForm.children.sendKeys(String.valueOf(travellers.getChild()));
+
     }
+    public void setTravellersWithNationality(Travellers travellers){
+        HotelForm hotelForm = new HotelForm(driver);
+
+        hotelForm.clearForm();
+
+        hotelForm.rooms.sendKeys(String.valueOf(travellers.getRooms()));
+        hotelForm.adults.sendKeys(String.valueOf(travellers.getAdults()));
+        hotelForm.children.sendKeys(String.valueOf(travellers.getChild()));
+        hotelForm.nationality.sendKeys(travellers.getNationality());
+    }
+
 }

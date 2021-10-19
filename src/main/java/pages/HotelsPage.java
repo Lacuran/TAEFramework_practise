@@ -5,6 +5,8 @@ import Core.TAEDriver;
 import Entities.HotelsSearch;
 import Entities.Travellers;
 import uicontrols.CustomSelect;
+import uicontrols.TravellersControl;
+
 
 public class HotelsPage extends BaseAbstractPage {
     public static String TITLE = "Search Hotels - PHPTRAVELS";
@@ -21,12 +23,17 @@ public class HotelsPage extends BaseAbstractPage {
     }
 
     public HotelsPage setTravellers(Travellers travellers) {
-        //you code here
+
         return this;
     }
 
     public HotelsPage submit() {
-        //your code
+
+        return this;
+    }
+
+    public HotelsPage setTravellersWithNationality(Travellers travellers){
+
         return this;
     }
 
