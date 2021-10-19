@@ -45,7 +45,7 @@ public class HotelsTests extends BaseAbstractTest {
     public void shouldSetUpTravellersWithNationality() {
         String nationality = "Poland";
 
-        Travellers travellers = new Travellers(5,10,0, nationality);
+        Travellers travellers = new Travellers(5,10,1, nationality);
 
         HotelsPage hotelsPage = new HotelsPage(getDriver());
         hotelsPage.clickDropBoxHotelSetting();
