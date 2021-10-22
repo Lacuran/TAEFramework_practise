@@ -18,6 +18,11 @@ public class HotelsSearch {
         this.travellers = travellers;
     }
 
+    public HotelsSearch(String cityName, Travellers travellers) {
+        this.cityName = cityName;
+        this.travellers = travellers;
+    }
+
     public String getCityName() {
         return cityName;
     }

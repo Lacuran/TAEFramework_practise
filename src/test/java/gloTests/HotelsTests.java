@@ -1,8 +1,11 @@
 package gloTests;
 
 import BaseTest.BaseAbstractTest;
+import Entities.HotelsSearch;
 import Entities.Travellers;
 import TAExceptions.TAUnknownBrowserException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -16,44 +19,32 @@ public class HotelsTests extends BaseAbstractTest {
         super("chrome");
     }
 
-    @BeforeTest
-    public void setUp(){
-        getDriver().navigateTo("https://www.phptravels.net/");
-        HomePage homePage = new HomePage(getDriver());
-        homePage.switchToHotelsPage();
-        String city = "Krakow";
-        CustomSelect customSelect = new CustomSelect("HotelCity", getDriver(), "(//*[@role='combobox'])[1]");
-        customSelect.selectItem(city);
-
-    }
-
     @Test
     public void shouldGetMassageNoMatchFound() {
+        getDriver().navigateTo("https://www.phptravels.net/");
+        String city = "Krakow";
+
         Travellers travellers = new Travellers(5,10,0);
+        HotelsSearch hotelsSearch = new HotelsSearch(city, travellers);
 
-        HotelsPage hotelsPage = new HotelsPage(getDriver());
-        hotelsPage.clickDropBoxHotelSetting();
-        hotelsPage.clearForm();
-        hotelsPage.setTravellers(travellers);
-        hotelsPage.submit();
+        new HomePage(getDriver()).switchToHotelsPage().fillPageAndSearch(hotelsSearch);
 
-        Assert.assertTrue(hotelsPage.noMatchFoundIsDisplayed(),"Message with no result is not displayed");
+        boolean noMatchFound = getDriver().getElement(By.xpath("//*[@*='no results']")).isDisplayed();
+        Assert.assertTrue(noMatchFound,"Message with no result is not displayed");
 
     }
 
     @Test
     public void shouldSetUpTravellersWithNationality() {
-        String nationality = "Poland";
+        getDriver().navigateTo("https://www.phptravels.net/");
+        String city = "Krakow";
 
-        Travellers travellers = new Travellers(5,10,1, nationality);
+        Travellers travellers = new Travellers(5,10,0,"Poland");
+        HotelsSearch hotelsSearch = new HotelsSearch(city, travellers);
 
-        HotelsPage hotelsPage = new HotelsPage(getDriver());
-        hotelsPage.clickDropBoxHotelSetting();
-        hotelsPage.clearForm();
-        hotelsPage.setTravellersWithNationality(travellers);
-        hotelsPage.submit();
+        new HomePage(getDriver()).switchToHotelsPage().fillPageAndSearch(hotelsSearch);
 
-        Assert.assertTrue(hotelsPage.noMatchFoundIsDisplayed(),"Message with no result is not displayed");
-
+        boolean noMatchFound = getDriver().getElement(By.xpath("//*[@*='no results']")).isDisplayed();
+        Assert.assertTrue(noMatchFound,"Message with no result is not displayed");
     }
 }

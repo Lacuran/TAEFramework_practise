@@ -15,15 +15,8 @@ import uicontrols.TravellersControl;
 public class HotelsPage extends BaseAbstractPage {
     public static String TITLE = "Search Hotels - PHPTRAVELS";
     CustomSelect cityDropdown;
+    TravellersControl travellersControl;
 
-    @FindBy(xpath = "//*[@id='rooms']")
-    public WebElement rooms;
-    @FindBy(xpath = "//*[@id='adults']")
-    public WebElement adults;
-    @FindBy(xpath = "//*[@id='childs']")
-    public WebElement children;
-    @FindBy(xpath = "//*[@id='nationality']")
-    public WebElement nationality;
     @FindBy(xpath = "//*[@class='dropdown-menu dropdown-menu-wrap']/..")
     public WebElement boxDropdownForHotels;
     @FindBy(xpath = "//*[@id='submit']")
@@ -34,6 +27,7 @@ public class HotelsPage extends BaseAbstractPage {
     public HotelsPage(TAEDriver driver) {
         super(driver, TITLE);
         cityDropdown = new CustomSelect("HotelCity", driver, "//span[@role='combobox']");
+        travellersControl = new TravellersControl("TravelersControl", driver, "//*[@class='dropdown-menu dropdown-menu-wrap']/..");
         PageFactory.initElements(driver.getDriver(), this);
     }
 
@@ -43,10 +37,8 @@ public class HotelsPage extends BaseAbstractPage {
     }
 
     public HotelsPage setTravellers(Travellers travellers) {
-        clearForm();
-        rooms.sendKeys(String.valueOf(travellers.getRooms()));
-        adults.sendKeys(String.valueOf(travellers.getAdults()));
-        children.sendKeys(String.valueOf(travellers.getChild()));
+        clickDropBoxHotelSetting();
+        travellersControl.setTravellers(travellers);
         return this;
     }
 
@@ -55,13 +47,6 @@ public class HotelsPage extends BaseAbstractPage {
         return this;
     }
 
-    public HotelsPage setTravellersWithNationality(Travellers travellers){
-        rooms.sendKeys(String.valueOf(travellers.getRooms()));
-        adults.sendKeys(String.valueOf(travellers.getAdults()));
-        children.sendKeys(String.valueOf(travellers.getChild()));
-        nationality.sendKeys(travellers.getNationality());
-        return this;
-    }
 
     public HotelsPage fillPage(HotelsSearch hotelsSearch) {
         selectCity(hotelsSearch.getCityName());
@@ -75,12 +60,7 @@ public class HotelsPage extends BaseAbstractPage {
         return this;
     }
 
-    public HotelsPage clearForm(){
-        rooms.clear();
-        adults.clear();
-        children.clear();
-        return this;
-    }
+
 
     public HotelsPage clickDropBoxHotelSetting(){
         boxDropdownForHotels.click();
